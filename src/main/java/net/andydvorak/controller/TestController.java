@@ -15,7 +15,7 @@ import java.util.List;
  * @since 3/2/13
  */
 @Controller
-@RequestMapping("/test")
+@RequestMapping( value = "/test" )
 final class FooController{
     @Autowired
     LocalFooService fooService;
