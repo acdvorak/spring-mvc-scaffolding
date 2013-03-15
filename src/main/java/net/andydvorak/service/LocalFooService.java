@@ -1,13 +1,12 @@
 package net.andydvorak.service;
 
 import net.andydvorak.model.Foo;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Andrew C. Dvorak
@@ -16,46 +15,48 @@ import java.util.List;
 @Service
 public class LocalFooService implements FooService {
 
-    List<Foo> foos = new ArrayList<Foo>();
+    Map<Long, Foo> foos = new HashMap<Long, Foo>();
 
     @Override
     public List<Foo> getAll() {
-        return foos;
+        return new ArrayList<Foo>(foos.values());
     }
 
     @Override
-    @Nullable
-    public Foo getById(final Long id) {
-        for (Foo foo : foos) {
-            if (ObjectUtils.equals(foo.getId(), id)) {
-                return foo;
-            }
+    public boolean exists(final Long id) {
+        return foos.containsKey(id);
+    }
+
+    @Override
+    public Foo getById(final Long id) throws NotFoundException {
+        if (!foos.containsKey(id)) {
+            throw new NotFoundException();
         }
-        return null;
+        return foos.get(id);
     }
 
     @Override
-    public Long create(final Foo entity) {
-        foos.add(entity);
+    public Long create(final Foo entity) throws AlreadyExistsException {
+        if (foos.containsKey(entity.getId())) {
+            throw new AlreadyExistsException();
+        }
+        foos.put(entity.getId(), entity);
         return entity.getId();
     }
 
+
     @Override
-    @Nullable
-    public Foo deleteById(final Long id) {
-        final Iterator<Foo> iterator = foos.iterator();
-        while (iterator.hasNext()) {
-            final Foo foo = iterator.next();
-            if (ObjectUtils.equals(foo.getId(), id)) {
-                iterator.remove();
-                return foo;
-            }
+    public Foo deleteById(Long id) throws NotFoundException {
+        if (!foos.containsKey(id)) {
+            throw new NotFoundException();
         }
-        return null;
+        return foos.remove(id);
     }
 
     @Override
     public Foo update(final Foo entity) {
+        foos.put(entity.getId(), entity);
         return entity;
     }
+
 }

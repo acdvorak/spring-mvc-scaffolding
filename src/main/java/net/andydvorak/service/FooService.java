@@ -1,9 +1,7 @@
 package net.andydvorak.service;
 
 import net.andydvorak.model.Foo;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -13,13 +11,13 @@ import java.util.List;
 public interface FooService {
     public List<Foo> getAll();
 
-    @Nullable
-    public Foo getById(final Long id);
+    public boolean exists(final Long id);
 
-    public Long create(final Foo entity);
+    public Foo getById(final Long id) throws NotFoundException;
 
-    @Nullable
-    public Foo deleteById(final Long id);
+    public Long create(final Foo entity) throws AlreadyExistsException;
+
+    public Foo deleteById(final Long id) throws NotFoundException;
 
     public Foo update(final Foo entity);
 }
