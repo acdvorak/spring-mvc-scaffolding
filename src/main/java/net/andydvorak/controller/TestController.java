@@ -1,7 +1,7 @@
 package net.andydvorak.controller;
 
 import net.andydvorak.model.Foo;
-import net.andydvorak.service.IFooService;
+import net.andydvorak.service.FooService;
 import net.andydvorak.service.LocalFooService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.List;
 final class FooController{
 //    @Autowired
 //    IFooService fooService;
-    IFooService fooService = new LocalFooService();
+    FooService fooService = new LocalFooService();
 
     @RequestMapping( method = RequestMethod.GET )
     @ResponseBody

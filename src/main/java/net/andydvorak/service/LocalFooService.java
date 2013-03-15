@@ -14,7 +14,7 @@ import java.util.List;
  * @since 3/2/13
  */
 @Service
-public class LocalFooService implements IFooService {
+public class LocalFooService implements FooService {
 
     List<Foo> foos = new ArrayList<Foo>();
 

@@ -11,7 +11,7 @@ import java.util.List;
  * @since 3/2/13
  */
 @Service
-public interface IFooService {
+public interface FooService {
     public List<Foo> getAll();
 
     @Nullable
