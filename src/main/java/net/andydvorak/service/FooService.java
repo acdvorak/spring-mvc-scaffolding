@@ -10,7 +10,6 @@ import java.util.List;
  * @author Andrew C. Dvorak
  * @since 3/2/13
  */
-@Service
 public interface FooService {
     public List<Foo> getAll();
 
@@ -24,3 +23,4 @@ public interface FooService {
 
     public Foo update(final Foo entity);
 }
+

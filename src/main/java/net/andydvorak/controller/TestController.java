@@ -3,6 +3,7 @@ package net.andydvorak.controller;
 import net.andydvorak.model.Foo;
 import net.andydvorak.service.FooService;
 import net.andydvorak.service.LocalFooService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,11 @@ import java.util.List;
  * @since 3/2/13
  */
 @Controller
-@RequestMapping( value = "/test" )
+@RequestMapping("/test")
 final class FooController{
-//    @Autowired
-//    IFooService fooService;
-    FooService fooService = new LocalFooService();
+    @Autowired
+    LocalFooService fooService;
+//    IFooService fooService = new LocalFooService();
 
     @RequestMapping( method = RequestMethod.GET )
     @ResponseBody
