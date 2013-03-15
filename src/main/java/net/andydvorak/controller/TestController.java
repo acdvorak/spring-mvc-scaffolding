@@ -83,7 +83,7 @@ final class FooController{
     @ExceptionHandler( NotFoundException.class )
     @ResponseStatus( value = HttpStatus.NOT_FOUND )
     public void handleNotFoundException(NotFoundException ex,
-                                          HttpServletResponse response) {
+                                        HttpServletResponse response) {
         logger.info("Handlng NotFoundException - Catching: "
                 + ex.getClass().getSimpleName());
     }
