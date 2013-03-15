@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.mysema.query.alias.Alias.$;
-import static com.mysema.query.alias.Alias.alias;
-import static com.mysema.query.collections.MiniApi.from;
-
 /**
  * @author Andrew C. Dvorak
  * @since 3/2/13
@@ -21,7 +17,6 @@ import static com.mysema.query.collections.MiniApi.from;
 public class LocalFooService implements IFooService {
 
     List<Foo> foos = new ArrayList<Foo>();
-    Foo fooAlias = alias(Foo.class, "foo");
 
     @Override
     public List<Foo> getAll() {
@@ -30,9 +25,12 @@ public class LocalFooService implements IFooService {
 
     @Override
     public Foo getById(final Long id) {
-        return from($(fooAlias), foos)
-              .where($(fooAlias.getId()).eq(id))
-              .singleResult($(fooAlias));
+        for (Foo foo : foos) {
+            if (ObjectUtils.equals(foo.getId(), id)) {
+                return foo;
+            }
+        }
+        return null;
     }
 
     @Override
