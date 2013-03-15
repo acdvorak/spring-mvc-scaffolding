@@ -39,7 +39,6 @@ final class FooController{
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     @ResponseBody
     public final Foo get( @PathVariable( "id" ) final Long id ){
-        checkNotNull(fooService.getById(id));
         return fooService.getById(id);
     }
 
@@ -67,10 +66,10 @@ final class FooController{
     public final void update( @PathVariable( "id" ) final Long id, @RequestBody final Foo entity ){
         checkNotNull(entity);
         checkState(ObjectUtils.equals(id, entity.getId()));
-        if (fooService.getById(id) == null) {
-            fooService.create(entity);
-        } else {
+        if (fooService.exists(id)) {
             fooService.update(entity);
+        } else {
+            fooService.create(entity);
         }
     }
 
