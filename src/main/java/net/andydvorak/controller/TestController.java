@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping( value = "/test" )
 final class FooController{
     @Autowired
-    LocalFooService fooService;
+    FooService fooService;
 //    IFooService fooService = new LocalFooService();
 
     @RequestMapping( method = RequestMethod.GET )
