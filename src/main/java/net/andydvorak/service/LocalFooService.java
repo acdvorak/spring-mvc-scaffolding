@@ -24,6 +24,7 @@ public class LocalFooService implements IFooService {
     }
 
     @Override
+    @Nullable
     public Foo getById(final Long id) {
         for (Foo foo : foos) {
             if (ObjectUtils.equals(foo.getId(), id)) {
