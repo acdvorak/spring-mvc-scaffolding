@@ -15,7 +15,14 @@ import java.util.Map;
 @Service
 public class LocalFooService implements FooService {
 
-    Map<Long, Foo> foos = new HashMap<Long, Foo>();
+    final Map<Long, Foo> foos = new HashMap<Long, Foo>();
+
+    public LocalFooService() {
+        foos.put(1L, new Foo(1L));
+        foos.put(2L, new Foo(2L));
+        foos.put(3L, new Foo(3L));
+        foos.put(4L, new Foo(4L));
+    }
 
     @Override
     public List<Foo> getAll() {
