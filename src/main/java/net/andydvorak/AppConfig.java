@@ -9,10 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @since 3/2/13
  */
 @Configuration
-//@ImportResource( { "classpath*:/rest_config.xml" } )
-//@ComponentScan( basePackages = "net.andydvorak" )
 @ComponentScan("net.andydvorak")
-//@PropertySource({ "classpath:rest.properties", "classpath:web.properties" })
 @EnableWebMvc
 public class AppConfig{
     @Bean
